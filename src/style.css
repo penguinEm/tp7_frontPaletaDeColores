@@ -1,0 +1,52 @@
+.color-titulo {
+  color: #0d6dfd63;
+}
+
+.color-titulo::placeholder {
+  color: #0d6dfd63;
+}
+
+.gradiente {
+  background-image: linear-gradient(to right, #ff8800, #00fff26e, #b7ff00c8);
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+}
+
+.gradiente:hover {
+    color: grey;
+    transition: 1s;
+}
+
+/* Bajar el foot */
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.main {
+  flex-grow: 1;
+}
+
+img {
+  height: 100px;
+  width: 120px; 
+  color:#00fff26e
+}
+
+.colorCard {
+  height: 120px;
+  width: 100%;
+}
+
+.colorInput {
+  height: 200px;
+  width: 200px;
+}
+
+.card {
+  width: "18rem"
+}
