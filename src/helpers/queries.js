@@ -21,7 +21,6 @@ export const crearColor = async (colorNuevo) => {
       },
       body: JSON.stringify(colorNuevo),
     });
-    console.log(respuesta);
     return respuesta;
   } catch (error) {
     console.error(error);
@@ -41,7 +40,6 @@ export const borrarColor = async (id) => {
   }
 };
 
-
 //! 4. GET de 1 color buscado por id
 export const leerUnColor = async (id) => {
   try {
@@ -52,4 +50,18 @@ export const leerUnColor = async (id) => {
   }
 };
 
-
+//! 5. PUT para editar 1 color
+export const editarColorApi = async (id, color) => {
+  try {
+    const respuesta = await fetch(`${URI_COLORES}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(color),
+    });
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+  }
+};

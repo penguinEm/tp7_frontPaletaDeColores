@@ -1,20 +1,31 @@
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Alert } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import ContenedorCards from "./ContenedorCards";
-import {  crearColor, leerColores } from "../helpers/queries";
+import {
+  crearColor,
+  editarColorApi,
+  leerColores,
+  leerUnColor,
+} from "../helpers/queries";
 import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 
-const FormularioColores = () => {
+const FormularioColores = ({ editar, btnTexto }) => {
   //!--------------------------------------------------------- Variables------------------------------------------------- */
-  const [inputColor, setInputColor] = useState("");
   const [colores, setColores] = useState([]);
+  const [mostrarCards, setMostrarCards] = useState(true);
+  const navegacion = useNavigate();
 
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm();
+  const { id } = useParams();
+  const inputColor = watch("nombreColor");
 
   //! -------------------------------------------------------- Funciones ------------------------------------------------ */
 
@@ -31,22 +42,53 @@ const FormularioColores = () => {
     }
   };
 
-  /* Validaciones del formulario /// CREAR y EDITAR */
-  const colorValidado = async (colorNuevo) => {
-    try {
-      const respuesta = await crearColor(colorNuevo);
-      if (respuesta.status === 201) {
-        alert("producto creado");
-        reset();
-        setColores([...colores, colorNuevo]);
-      } else {
-        alert("ocurrio un error al crear la tarea");
-      }
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    if (editar === true) {
+      cargarFormulario();
+      setMostrarCards(false);
+    } else {
+      setMostrarCards(true);
+    }
+  }, [editar]);
+
+  const cargarFormulario = async () => {
+    const respuesta = await leerUnColor(id);
+    if (respuesta.status === 200) {
+      const colorBuscado = await respuesta.json();
+      setValue("nombreColor", colorBuscado.nombreColor);
+    } else {
+      alert("ocurrio un error al buscar el color por id");
     }
   };
 
+  /* Validaciones del formulario /// CREAR y EDITAR */
+  const colorValidado = async (colorNuevo) => {
+    //EDITAR
+    if (editar === true) {
+      const respuesta = await editarColorApi(id, colorNuevo);
+      if (respuesta.status === 200) {
+        alert("Se ha editado su color");
+        navegacion("/");
+        reset();
+      } else {
+        alert("ocurrio un error al editar");
+      }
+    }
+    //CREAR
+    else
+      try {
+        const respuesta = await crearColor(colorNuevo);
+        if (respuesta.status === 201) {
+          alert("producto creado");
+          reset();
+          setColores([...colores, colorNuevo]);
+        } else {
+          alert("ocurrio un error al crear la tarea");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+  };
 
   //! ------------------------------------------------------------- Maquetado - log ext------------------------------------ */
 
@@ -63,7 +105,11 @@ const FormularioColores = () => {
               <Form.Control
                 type="text"
                 placeholder="Ej:  Red o #FF0000  "
-                className="w-70 h-75 color-titulo"
+                className={`${
+                  editar === true ? "color-editar" : "color-titulo"
+                } w-70 h-75`}
+                onChange={(e) => setInputColor(e.target.value)}
+                value={inputColor}
                 {...register("nombreColor", {
                   required: "El campo para ingresar el color es obligatorio",
                   minLength: {
@@ -81,14 +127,33 @@ const FormularioColores = () => {
               </Form.Text>
             </div>
           </div>
-          <div className="mt-5 text-end mx-5 border-primary border-bottom py-3">
-            <Button type="submit" variant="primary" className="rounded-1 ">
-              Guardar
+          <div className="px-5 pb-3 bg-body-tertiary text-center">
+            <Button
+              type="submit"
+              variant={editar === true ? "warning" : "primary"}
+              className="rounded-1 "
+            >
+              {btnTexto}
             </Button>
           </div>
         </Form.Group>
       </Form>
-      <ContenedorCards colores={colores} setColores={setColores}></ContenedorCards>
+      {mostrarCards && colores.length > 0 && (
+        <ContenedorCards
+          colores={colores}
+          setColores={setColores}
+        ></ContenedorCards>
+      )}
+      {mostrarCards && colores.length === 0 && (
+        <Alert variant="info" className="mt-3">
+          Aún no se ha cargado ningun color
+        </Alert>
+      )}
+      {!mostrarCards && colores.length > 0 && (
+        <Alert variant="info" className="mt-3">
+          Editando Color...
+        </Alert>
+      )}
     </>
   );
 };

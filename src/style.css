@@ -5,7 +5,9 @@
 .color-titulo::placeholder {
   color: #0d6dfd63;
 }
-
+.color-editar {
+  color: #b7ff00c8
+}
 .gradiente {
   background-image: linear-gradient(to right, #ff8800, #00fff26e, #b7ff00c8);
   -webkit-background-clip: text;
