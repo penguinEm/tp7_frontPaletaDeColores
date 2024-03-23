@@ -1,8 +1,20 @@
 {
   "color": [
     {
-      "id": "4077",
-      "nombreColor": "white"
+      "nombreColor": "grey",
+      "id": "b7eb"
+    },
+    {
+      "nombreColor": "orange",
+      "id": "63f2"
+    },
+    {
+      "id": "a946",
+      "nombreColor": "purple"
+    },
+    {
+      "id": "bbb0",
+      "nombreColor": "salmon"
     }
   ]
 }

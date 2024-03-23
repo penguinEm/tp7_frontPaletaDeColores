@@ -17,7 +17,7 @@ const CardsColores = ({ color, setColores }) => {
   //logica de borrar y actulizar las cards luego
   const borrar = async () => {
     Swal.fire({
-      html: `¿Estas seguro que desea borrar:<span class="text-danger fw-bold"> ${color.nombreColor}</span>?`,
+      html: `¿Estas seguro que desea borrar:<span class="text-danger fw-bold"> ${color.nombreColor.toUpperCase()}</span>?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",

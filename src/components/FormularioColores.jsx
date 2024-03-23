@@ -11,7 +11,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
 const FormularioColores = ({ editar, btnTexto }) => {
   //!--------------------------------------------------------- Variables------------------------------------------------- */
   const [colores, setColores] = useState([]);
@@ -70,7 +69,7 @@ const FormularioColores = ({ editar, btnTexto }) => {
       if (respuesta.status === 200) {
         Swal.fire({
           title: "Buen trabajo!",
-          html: `Se editó correctamente <span class="fw-bold text-warning">${colorNuevo.nombreColor}</span>`,
+          html: `Se editó correctamente <span style="color: ${inputColor}" class="fw-bold">${colorNuevo.nombreColor.toUpperCase()}</span>`,
           icon: "success",
         });
         navegacion("/");
@@ -90,7 +89,7 @@ const FormularioColores = ({ editar, btnTexto }) => {
         if (respuesta.status === 201) {
           Swal.fire({
             title: "Buen trabajo!",
-            html: `Se agregó la card: <span class="text-primary fw-bold">${colorNuevo.nombreColor}</span>`,
+            html: `Se agregó la card: <span style="color: ${inputColor}" class="fw-bold">${colorNuevo.nombreColor.toUpperCase()}</span>`,
             icon: "success",
           });
           reset();
