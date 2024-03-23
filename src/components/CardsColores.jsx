@@ -2,6 +2,7 @@ import Card from "react-bootstrap/Card";
 import { borrarColor, leerColores } from "../helpers/queries";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 const CardsColores = ({ color, setColores }) => {
   //! ---------------------------------- FUNCIONES -----------------------------------------------------------------------------
@@ -15,13 +16,31 @@ const CardsColores = ({ color, setColores }) => {
 
   //logica de borrar y actulizar las cards luego
   const borrar = async () => {
-    const respuesta = await borrarColor(color.id);
-    if (respuesta.status === 200) {
-      alert("color borrado correctamente");
-      setColores(coloresActualizados());
-    } else {
-      alert("ocurrio un error al borrar el color");
-    }
+    Swal.fire({
+      html: `¿Estas seguro que desea borrar:<span class="text-danger fw-bold"> ${color.nombreColor}</span>?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Borrar",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const respuesta = await borrarColor(color.id);
+        if (respuesta.status === 200) {
+          setColores(coloresActualizados());
+          Swal.fire({
+            html: `Color: <span class="text-danger fw-bold">${color.nombreColor}</span> borrado!`,
+            icon: "success",
+          });
+        } else {
+          Swal.fire({
+            title: "Ocurrio un error, intente mas tarde!",
+            icon: "error",
+          });
+        }
+      }
+    });
   };
 
   //! ---------------------------------- MAQUETADO -----------------------------------------------------------------------------

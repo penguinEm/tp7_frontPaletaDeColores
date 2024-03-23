@@ -9,13 +9,14 @@ import {
 } from "../helpers/queries";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 const FormularioColores = ({ editar, btnTexto }) => {
   //!--------------------------------------------------------- Variables------------------------------------------------- */
   const [colores, setColores] = useState([]);
   const [mostrarCards, setMostrarCards] = useState(true);
   const navegacion = useNavigate();
-
   const {
     register,
     handleSubmit,
@@ -67,11 +68,19 @@ const FormularioColores = ({ editar, btnTexto }) => {
     if (editar === true) {
       const respuesta = await editarColorApi(id, colorNuevo);
       if (respuesta.status === 200) {
-        alert("Se ha editado su color");
+        Swal.fire({
+          title: "Buen trabajo!",
+          html: `Se editó correctamente <span class="fw-bold text-warning">${colorNuevo.nombreColor}</span>`,
+          icon: "success",
+        });
         navegacion("/");
         reset();
       } else {
-        alert("ocurrio un error al editar");
+        Swal.fire({
+          title: "Oops",
+          text: "Ocurrió un error al editar, inténtelo nuevamente más tarde!",
+          icon: "error",
+        });
       }
     }
     //CREAR
@@ -79,11 +88,19 @@ const FormularioColores = ({ editar, btnTexto }) => {
       try {
         const respuesta = await crearColor(colorNuevo);
         if (respuesta.status === 201) {
-          alert("producto creado");
+          Swal.fire({
+            title: "Buen trabajo!",
+            html: `Se agregó la card: <span class="text-primary fw-bold">${colorNuevo.nombreColor}</span>`,
+            icon: "success",
+          });
           reset();
           setColores([...colores, colorNuevo]);
         } else {
-          alert("ocurrio un error al crear la tarea");
+          Swal.fire({
+            title: "Oops",
+            text: "Ocurrió un error, inténtelo nuevamente más tarde!",
+            icon: "error",
+          });
         }
       } catch (error) {
         console.error(error);
