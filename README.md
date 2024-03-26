@@ -43,5 +43,5 @@ npm install @fortawesome/free-solid-svg-icons bootstrap bootstrap-icons react re
 ```
 ## Repositorios
 
-- [Backend CRUD de Tareas](https://github.com/penguinEm/Tp7_backendPaletaDeColores.git): Enlace al repositorio del backend.
+- [Backend CRUD de Colores](https://github.com/penguinEm/Tp7_backendPaletaDeColores.git): Enlace al repositorio del backend.
 - [Frontend](https://github.com/penguinEm/tp7_frontPaletaDeColores.git): Enlace al repositorio del frontend.
