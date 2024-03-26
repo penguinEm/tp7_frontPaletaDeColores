@@ -124,8 +124,6 @@ const FormularioColores = ({ editar, btnTexto }) => {
                 className={`${
                   editar === true ? "color-editar" : "color-titulo"
                 } w-70 h-75`}
-                onChange={(e) => setInputColor(e.target.value)}
-                value={inputColor}
                 {...register("nombreColor", {
                   required: "El campo para ingresar el color es obligatorio",
                   minLength: {
