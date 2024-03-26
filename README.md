@@ -5,14 +5,14 @@ Este proyecto consiste en la parte frontend de la práctica de un CRUD de Paleta
 ![alt text](public/1paleta.png)
 ![alt text](<public/2 paleta.png>)
 
-## Descripción del CRUD de Lista de Tareas
+## Descripción del CRUD de Lista de Tarjetas de Colores
 
 El frontend de esta aplicación implementa un sistema CRUD (Crear, Leer, Actualizar, Eliminar) para administrar una paleta de colores. Utiliza solicitudes Fetch para comunicarse con el backend, permitiendo al usuario realizar las siguientes operaciones:
 
-- **Crear Tarea:** Permite al usuario agregar una nueva tarea a la lista.
-- **Leer Tareas:** Muestra la lista completa de tareas almacenadas en el backend.
-- **Actualizar Tarea:** Permite al usuario editar una tarea existente.
-- **Eliminar Tarea:** Permite al usuario eliminar una tarea de la lista.
+- **Crear Tarjeta con un color:** Permite al usuario agregar una nueva tarjeta a la lista.
+- **Leer el conjunto de todas las tarjetas:** Muestra la lista completa de colores almacenadas en el backend.
+- **Actualizar Color:** Permite al usuario editar un color existente.
+- **Eliminar Tarjeta:** Permite al usuario eliminar una color de la lista.
 Estas operaciones se realizan mediante solicitudes HTTP al backend, que gestiona la lógica y la persistencia de los datos en la base de datos.
 
 ![alt text](<public/3delete paleta.png>)
