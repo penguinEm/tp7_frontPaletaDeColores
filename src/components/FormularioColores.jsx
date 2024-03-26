@@ -55,7 +55,7 @@ const FormularioColores = ({ editar, btnTexto }) => {
     const respuesta = await leerUnColor(id);
     if (respuesta.status === 200) {
       const colorBuscado = await respuesta.json();
-      setValue("nombreColor", colorBuscado.nombreColor);
+      setValue("nombreColor", colorBuscado.mensaje.nombreColor);
     } else {
       alert("ocurrio un error al buscar el color por id");
     }
