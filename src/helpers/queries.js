@@ -45,6 +45,7 @@ export const leerUnColor = async (id) => {
   try {
     const respuesta = await fetch(`${URI_COLORES}/${id}`);
     return respuesta;
+    console.log(respuesta)
   } catch (error) {
     console.error(error);
   }

@@ -26,7 +26,7 @@ const CardsColores = ({ color, setColores }) => {
       cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const respuesta = await borrarColor(color.id);
+        const respuesta = await borrarColor(color._id);
         if (respuesta.status === 200) {
           setColores(coloresActualizados());
           Swal.fire({
@@ -58,7 +58,7 @@ const CardsColores = ({ color, setColores }) => {
           <Link className="btn btn-outline-danger me-1" onClick={borrar}>
             <i className="bi bi-trash3-fill"></i>
           </Link>
-          <Link className="btn btn-outline-warning" to={`editar/${color.id}`}>
+          <Link className="btn btn-outline-warning" to={`editar/${color._id}`}>
             <i className="bi bi-pencil-square"></i>
           </Link>
         </div>
